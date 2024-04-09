@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Employee</title>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+         
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
  <h2>Lista dipendenti</h2>
@@ -26,5 +32,63 @@
         <input type="text" id="lastName" name="cognome"><br>
         <input type="submit" value="Submit">
         </form>
+      
+<h2>Lista dipendenti</h2>
+<ul th:each = "stringa: ${lista1}">
+<li th:text = "${stringa.nome}"></li>
+<li th:text = "${stringa.conteggio}"></li>
+</ul>
+<div align="center" style="width: 1000px;">
+        <h2>Spring Boot Google Charts Example</h2>
+        <div id="chart_div"></div>
+        <div id="piechart" style="width: 900px; height: 500px;"></div>
+    </div>
+    <script th:inline="javascript">
+        var mansioniData = /*[[${lista1}]]*/ [];
+        
+        $(document).ready(function() {
+            google.charts.load('current', { packages : [ 'corechart', 'bar' ] });
+            google.charts.setOnLoadCallback(drawColumnChart);
+            google.charts.setOnLoadCallback(drawPieChart);
+        });
+
+        function drawColumnChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Mansione');
+            data.addColumn('number', 'Numero Dipendenti');
+            
+            mansioniData.forEach(function(mansione) {
+                data.addRow([mansione.nome, mansione.conteggio]);
+            });
+            
+            var options = {
+                title : 'Numero di dipendenti per mansione',
+                hAxis : { title : 'Mansione' },
+                vAxis : { title : 'Numero Dipendenti' }
+            };
+            
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+
+        function drawPieChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Mansione');
+            data.addColumn('number', 'Numero Dipendenti');
+            
+            mansioniData.forEach(function(mansione) {
+                data.addRow([mansione.nome, mansione.conteggio]);
+            });
+            
+            var options = { title : 'Numero di dipendenti per mansione' };
+            
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+
+ 
+     
 </body>
 </html>
