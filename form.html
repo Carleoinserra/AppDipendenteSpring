@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Employee</title>
+</head>
+<body>
+ <h2>Lista dipendenti</h2>
+<ul th:each = "stringa: ${lista}">
+<li th:text = "${stringa.getCognome()}"></li>
+<li th:text = "${stringa.getMansione()}"></li>
+<li th:text = "${stringa.getStipendio()}"></li></ul>
+    <h2>Add Employee</h2>
+    <form action="/inserisci-dipendente" method="post">
+        
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="cognome"><br>
+        <label for="position">Position:</label><br>
+        <input type="text" id="position" name="mansione"><br>
+        <label for="salary">Salary:</label><br>
+        <input type="text" id="salary" name="stipendio"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <form action="/cancella-dipendente" method="post">
+    <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="cognome"><br>
+        <input type="submit" value="Submit">
+        </form>
+</body>
+</html>
