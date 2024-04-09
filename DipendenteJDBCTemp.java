@@ -5,6 +5,8 @@ package com.example.demo;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -80,4 +82,9 @@ public class DipendenteJDBCTemp {
     public void executeDDLQuery(String query) {
         jdbcTemplateObject.execute(query);
     }
+  
+
+
+
+
 }
